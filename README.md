@@ -1,7 +1,7 @@
 # Muhasibatlıq Proqramı – Backend
 
 ## Layihənin Təsviri
-Bu layihə, istifadəçilərin veb brauzer üzərindən mühasibat əməliyyatlarını idarə edə biləcəyi **web-based accounting application** dur.
+Bu layihə, istifadəçilərin veb brauzer üzərindən mühasibat əməliyyatları aparmasına imkan yaradır. Proqram istifadəçiyə mühasibatlıq hesablarını idarə etməyə, müxabirləşmələri daxil etməyə və maliyyə məlumatlarını analiz etməyə imkan verir.
 
 İstifadəçi qeydiyyatdan keçir, giriş edir və yalnız öz hesab məlumatlarını görə bilir.
 
@@ -33,7 +33,7 @@ Layihənin əsas funksiyaları:
 ## FAZA 1–10 Flowchart
 
 
-- FAZA 1 → Project Skeleton and Configurat 
+- FAZA 1 → Project Skeleton and Configuration 
 - FAZA 2 → Database & Entities  
 - FAZA 3 → Repository Layer  
 - FAZA 4 → Service Layer  
