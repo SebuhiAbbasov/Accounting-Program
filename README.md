@@ -1,7 +1,8 @@
 # Muhasibatlıq Proqramı – Backend
 
 ## Layihənin Təsviri
-Bu layihə, istifadəçilərin veb brauzer üzərindən mühasibat əməliyyatlarını idarə edə biləcəyi **web-based accounting application** dur.  
+Bu layihə, istifadəçilərin veb brauzer üzərindən mühasibat əməliyyatlarını idarə edə biləcəyi **web-based accounting application** dur.
+
 İstifadəçi qeydiyyatdan keçir, giriş edir və yalnız öz hesab məlumatlarını görə bilir.
 
 Layihənin əsas funksiyaları:
