@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -19,20 +20,22 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "hesabın_adı", nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(name = "hesabın_nömrəsi", nullable = false)
     private String code;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "hesabın_tipi", nullable = false)
     private AccountType type;
+
+    @CreationTimestamp
+    @Column (name = "yaradılma_tarixi")
+    private LocalDateTime createdAt;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
-
-    private LocalDateTime createdAt = LocalDateTime.now();
 }
 

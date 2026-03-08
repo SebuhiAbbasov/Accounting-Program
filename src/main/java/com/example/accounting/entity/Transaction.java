@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -20,6 +21,23 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "məbləğ", nullable = false)
+    private BigDecimal amount;
+
+    @Column(name = "əməliyyatın_məzmunu", nullable = false)
+    private String description;
+
+    @Column(name = "əməliyyatın_tarixi", nullable = false)
+    private LocalDate transactionDate;
+
+    @CreationTimestamp
+    @Column (name = "yaradılma_tarixi")
+    private LocalDateTime createdAt;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
     @ManyToOne
     @JoinColumn(name = "debit_account_id", nullable = false)
     private Account debitAccount;
@@ -27,20 +45,6 @@ public class Transaction {
     @ManyToOne
     @JoinColumn(name = "credit_account_id", nullable = false)
     private Account creditAccount;
-
-    @Column(nullable = false)
-    private BigDecimal amount;
-
-    private String description;
-
-    @Column(nullable = false)
-    private LocalDate transactionDate;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-
-    private LocalDateTime createdAt = LocalDateTime.now();
 }
 
 
