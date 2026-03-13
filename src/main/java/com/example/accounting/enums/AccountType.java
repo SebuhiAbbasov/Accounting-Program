@@ -1,4 +1,4 @@
-package com.example.accounting.constant;
+package com.example.accounting.enums;
 
 public enum AccountType {
     ACTIVE,

@@ -19,7 +19,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "istifadəçi_adı", nullable = false, unique = true)
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
 
     @Column(name = "email", nullable = false, unique = true)
@@ -29,7 +29,7 @@ public class User {
     private String password;
 
     @CreationTimestamp
-    @Column (name = "yaradılma_tarixi")
+    @Column (name = "created_at")
     private LocalDateTime createdAt;
 
 }

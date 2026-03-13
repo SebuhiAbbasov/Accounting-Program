@@ -1,6 +1,6 @@
 package com.example.accounting.entity;
 
-import com.example.accounting.constant.AccountType;
+import com.example.accounting.enums.AccountType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,18 +20,18 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "hesabın_adı", nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "hesabın_nömrəsi", nullable = false)
+    @Column(name = "code", nullable = false)
     private String code;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "hesabın_tipi", nullable = false)
+    @Column(name = "type", nullable = false)
     private AccountType type;
 
     @CreationTimestamp
-    @Column (name = "yaradılma_tarixi")
+    @Column (name = "created_at")
     private LocalDateTime createdAt;
 
     @ManyToOne

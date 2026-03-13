@@ -21,17 +21,17 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "məbləğ", nullable = false)
+    @Column(name = "amount", nullable = false)
     private BigDecimal amount;
 
-    @Column(name = "əməliyyatın_məzmunu", nullable = false)
+    @Column(name = "description", nullable = false)
     private String description;
 
-    @Column(name = "əməliyyatın_tarixi", nullable = false)
+    @Column(name = "transaction_date", nullable = false)
     private LocalDate transactionDate;
 
     @CreationTimestamp
-    @Column (name = "yaradılma_tarixi")
+    @Column (name = "created_at")
     private LocalDateTime createdAt;
 
     @ManyToOne
