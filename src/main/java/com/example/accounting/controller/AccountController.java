@@ -15,8 +15,9 @@ public class AccountController {
 
     private final AccountService accountService;
 
+    // CREATE
     @PostMapping
-    public Account create(
+    public Account createAccount(
             @RequestParam String name,
             @RequestParam String code,
             @RequestParam AccountType type
@@ -24,9 +25,17 @@ public class AccountController {
         return accountService.createAccount(name, code, type);
     }
 
+    // READ ALL
     @GetMapping
-    public List<Account> getAll() {
+    public List<Account> getAllAccounts() {
         return accountService.getAccounts();
     }
+
+    // READ ONE
+    @GetMapping("/{id}")
+    public Account getAccount(@PathVariable Long id) {
+        return accountService.getAccountById(id);
+    }
 }
+
 

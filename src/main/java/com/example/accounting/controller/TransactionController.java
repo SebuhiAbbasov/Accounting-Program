@@ -16,12 +16,13 @@ public class TransactionController {
 
     private final TransactionService transactionService;
 
+    // CREATE TRANSACTION
     @PostMapping
-    public Transaction create(
+    public Transaction createTransaction(
             @RequestParam Long debitAccountId,
             @RequestParam Long creditAccountId,
             @RequestParam BigDecimal amount,
-            @RequestParam String description,
+            @RequestParam(required = false) String description,
             @RequestParam LocalDate date
     ) {
         return transactionService.createTransaction(
@@ -29,12 +30,15 @@ public class TransactionController {
         );
     }
 
-    @GetMapping("/ledger")
-    public List<Transaction> ledger(
+    // ACCOUNT STATEMENT
+    @GetMapping("/account/{accountId}")
+    public List<Transaction> accountStatement(
+            @PathVariable Long accountId,
             @RequestParam LocalDate from,
             @RequestParam LocalDate to
     ) {
-        return transactionService.getLedger(from, to);
+        return transactionService.getAccountStatement(accountId, from, to);
     }
 }
+
 
