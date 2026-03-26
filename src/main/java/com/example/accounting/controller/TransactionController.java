@@ -1,5 +1,8 @@
 package com.example.accounting.controller;
 
+import com.example.accounting.dto.TransactionMapper;
+import com.example.accounting.dto.TransactionRequestDto;
+import com.example.accounting.dto.TransactionResponseDto;
 import com.example.accounting.entity.Transaction;
 import com.example.accounting.service.TransactionService;
 import lombok.RequiredArgsConstructor;
@@ -18,17 +21,20 @@ public class TransactionController {
 
     // CREATE TRANSACTION
     @PostMapping
-    public Transaction createTransaction(
-            @RequestParam Long debitAccountId,
-            @RequestParam Long creditAccountId,
-            @RequestParam BigDecimal amount,
-            @RequestParam(required = false) String description,
-            @RequestParam LocalDate date
+    public TransactionResponseDto create(
+            @RequestBody TransactionRequestDto dto
     ) {
-        return transactionService.createTransaction(
-                debitAccountId, creditAccountId, amount, description, date
+        return TransactionMapper.toDto(
+                transactionService.createTransaction(
+                        dto.getDebitAccountId(),
+                        dto.getCreditAccountId(),
+                        dto.getAmount(),
+                        dto.getDescription(),
+                        dto.getDate()
+                )
         );
     }
+
 
     // ACCOUNT STATEMENT
     @GetMapping("/account/{accountId}")

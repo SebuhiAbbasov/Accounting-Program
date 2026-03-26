@@ -1,5 +1,8 @@
 package com.example.accounting.controller;
 
+import com.example.accounting.dto.AccountMapper;
+import com.example.accounting.dto.AccountRequestDto;
+import com.example.accounting.dto.AccountResponseDto;
 import com.example.accounting.entity.Account;
 import com.example.accounting.enums.AccountType;
 import com.example.accounting.service.AccountService;
@@ -17,19 +20,28 @@ public class AccountController {
 
     // CREATE
     @PostMapping
-    public Account createAccount(
-            @RequestParam String name,
-            @RequestParam String code,
-            @RequestParam AccountType type
+    public AccountResponseDto createAccount(
+            @RequestBody AccountRequestDto dto
     ) {
-        return accountService.createAccount(name, code, type);
+        return AccountMapper.toDto(
+                accountService.createAccount(
+                        dto.getName(),
+                        dto.getCode(),
+                        dto.getType()
+                )
+        );
     }
+
 
     // READ ALL
     @GetMapping
-    public List<Account> getAllAccounts() {
-        return accountService.getAccounts();
+    public List<AccountResponseDto> getAllAccounts() {
+        return accountService.getAccounts()
+                .stream()
+                .map(AccountMapper::toDto)
+                .toList();
     }
+
 
     // READ ONE
     @GetMapping("/{id}")
