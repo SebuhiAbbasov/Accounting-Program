@@ -6,6 +6,7 @@ import com.example.accounting.dto.AccountResponseDto;
 import com.example.accounting.entity.Account;
 import com.example.accounting.enums.AccountType;
 import com.example.accounting.service.AccountService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +22,7 @@ public class AccountController {
     // CREATE
     @PostMapping
     public AccountResponseDto createAccount(
-            @RequestBody AccountRequestDto dto
+            @Valid @RequestBody AccountRequestDto dto
     ) {
         return AccountMapper.toDto(
                 accountService.createAccount(

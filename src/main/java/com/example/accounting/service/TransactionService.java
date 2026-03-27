@@ -3,6 +3,7 @@ package com.example.accounting.service;
 import com.example.accounting.entity.Account;
 import com.example.accounting.entity.Transaction;
 import com.example.accounting.entity.User;
+import com.example.accounting.exception.BadRequestException;
 import com.example.accounting.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,11 +29,11 @@ public class TransactionService {
     ) {
 
         if (debitAccountId.equals(creditAccountId)) {
-            throw new RuntimeException("Debit and Credit accounts cannot be same");
+            throw new BadRequestException("Debit and Credit accounts cannot be same");
         }
 
         if (amount.compareTo(BigDecimal.ZERO) <= 0) {
-            throw new RuntimeException("Amount must be greater than zero");
+            throw new BadRequestException("Amount must be greater than zero");
         }
 
         Account debit = accountService.getAccountById(debitAccountId);

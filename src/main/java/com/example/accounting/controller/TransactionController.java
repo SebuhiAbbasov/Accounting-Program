@@ -5,6 +5,7 @@ import com.example.accounting.dto.TransactionRequestDto;
 import com.example.accounting.dto.TransactionResponseDto;
 import com.example.accounting.entity.Transaction;
 import com.example.accounting.service.TransactionService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +23,7 @@ public class TransactionController {
     // CREATE TRANSACTION
     @PostMapping
     public TransactionResponseDto create(
-            @RequestBody TransactionRequestDto dto
+            @Valid @RequestBody TransactionRequestDto dto
     ) {
         return TransactionMapper.toDto(
                 transactionService.createTransaction(

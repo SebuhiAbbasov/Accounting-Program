@@ -3,6 +3,7 @@ package com.example.accounting.service;
 import com.example.accounting.entity.Account;
 import com.example.accounting.entity.User;
 import com.example.accounting.enums.AccountType;
+import com.example.accounting.exception.NotFoundException;
 import com.example.accounting.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -39,7 +40,7 @@ public class AccountService {
 
     public Account getAccountById(Long id) {
         return accountRepository.findByIdAndUser(id, userService.getCurrentUser())
-                .orElseThrow(() -> new RuntimeException("Account not found"));
+                .orElseThrow(() -> new NotFoundException("Account not found"));
     }
 }
 
