@@ -29,7 +29,7 @@ public class User {
     private String password;
 
     @CreationTimestamp
-    @Column (name = "created_at")
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
 }

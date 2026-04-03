@@ -57,6 +57,41 @@ public class TransactionService {
                         userService.getCurrentUser(), from, to);
     }
 
+    public Transaction getTransactionById(Long id) {
+        return transactionRepository.findByIdAndUser(id, userService.getCurrentUser())
+                .orElseThrow(() -> new BadRequestException("Transaction not found"));
+    }
+
+    public Transaction updateTransaction(
+            Long id,
+            Long debitAccountId,
+            Long creditAccountId,
+            BigDecimal amount,
+            String description,
+            LocalDate date
+    ) {
+        Transaction tx = getTransactionById(id);
+
+        if (debitAccountId.equals(creditAccountId)) {
+            throw new BadRequestException("Debit and Credit accounts cannot be same");
+        }
+
+        if (amount.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new BadRequestException("Amount must be greater than zero");
+        }
+
+        Account debit = accountService.getAccountById(debitAccountId);
+        Account credit = accountService.getAccountById(creditAccountId);
+
+        tx.setDebitAccount(debit);
+        tx.setCreditAccount(credit);
+        tx.setAmount(amount);
+        tx.setDescription(description);
+        tx.setTransactionDate(date);
+
+        return transactionRepository.save(tx);
+    }
+
     public List<Transaction> getAccountStatement(
             Long accountId,
             LocalDate from,
@@ -68,6 +103,11 @@ public class TransactionService {
                 .findAllByDebitAccountOrCreditAccountAndTransactionDateBetween(
                         account, account, from, to
                 );
+    }
+
+    public void deleteTransaction(Long id) {
+        Transaction tx = getTransactionById(id);
+        transactionRepository.delete(tx);
     }
 }
 

@@ -1,5 +1,10 @@
 package com.example.accounting.exception;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class ErrorResponse {
     private int status;
     private String message;
@@ -10,4 +15,3 @@ public class ErrorResponse {
     }
 
 }
-

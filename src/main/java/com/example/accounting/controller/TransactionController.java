@@ -9,7 +9,6 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -34,6 +33,30 @@ public class TransactionController {
                         dto.getDate()
                 )
         );
+    }
+
+    // UPDATE TRANSACTION
+    @PutMapping("/{id}")
+    public TransactionResponseDto update(
+            @PathVariable Long id,
+            @Valid @RequestBody TransactionRequestDto dto
+    ) {
+        return TransactionMapper.toDto(
+                transactionService.updateTransaction(
+                        id,
+                        dto.getDebitAccountId(),
+                        dto.getCreditAccountId(),
+                        dto.getAmount(),
+                        dto.getDescription(),
+                        dto.getDate()
+                )
+        );
+    }
+
+    // DELETE TRANSACTION
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        transactionService.deleteTransaction(id);
     }
 
 

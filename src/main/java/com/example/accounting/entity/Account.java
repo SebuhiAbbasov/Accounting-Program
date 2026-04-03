@@ -31,7 +31,7 @@ public class Account {
     private AccountType type;
 
     @CreationTimestamp
-    @Column (name = "created_at")
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @ManyToOne

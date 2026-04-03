@@ -32,7 +32,7 @@ public class GlobalExceptionHandler {
     public ErrorResponse handleGeneral(Exception ex) {
         return new ErrorResponse(
                 500,
-                "Unexpected error occurred"
+                ex.getMessage()
         );
     }
 

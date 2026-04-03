@@ -4,7 +4,6 @@ import com.example.accounting.dto.AccountMapper;
 import com.example.accounting.dto.AccountRequestDto;
 import com.example.accounting.dto.AccountResponseDto;
 import com.example.accounting.entity.Account;
-import com.example.accounting.enums.AccountType;
 import com.example.accounting.service.AccountService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -48,6 +47,28 @@ public class AccountController {
     @GetMapping("/{id}")
     public Account getAccount(@PathVariable Long id) {
         return accountService.getAccountById(id);
+    }
+
+    // UPDATE
+    @PutMapping("/{id}")
+    public AccountResponseDto updateAccount(
+            @PathVariable Long id,
+            @Valid @RequestBody AccountRequestDto dto
+    ) {
+        return AccountMapper.toDto(
+                accountService.updateAccount(
+                        id,
+                        dto.getName(),
+                        dto.getCode(),
+                        dto.getType()
+                )
+        );
+    }
+
+    // DELETE
+    @DeleteMapping("/{id}")
+    public void deleteAccount(@PathVariable Long id) {
+        accountService.deleteAccount(id);
     }
 }
 

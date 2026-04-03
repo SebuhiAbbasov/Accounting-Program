@@ -42,5 +42,27 @@ public class AccountService {
         return accountRepository.findByIdAndUser(id, userService.getCurrentUser())
                 .orElseThrow(() -> new NotFoundException("Account not found"));
     }
+
+    public Account updateAccount(Long id, String name, String code, AccountType type) {
+        Account account = getAccountById(id);
+
+        // Check if new code already exists in another account
+        if (!account.getCode().equals(code) &&
+                accountRepository.existsByCodeAndUser(code, userService.getCurrentUser())) {
+            throw new RuntimeException("Account code already exists");
+        }
+
+        account.setName(name);
+        account.setCode(code);
+        account.setType(type);
+
+        return accountRepository.save(account);
+    }
+
+    public void deleteAccount(Long id) {
+        Account account = getAccountById(id);
+        // Optional: Check if account has transactions before deleting
+        accountRepository.delete(account);
+    }
 }
 

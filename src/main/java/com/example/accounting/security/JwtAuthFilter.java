@@ -23,6 +23,12 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             FilterChain filterChain
     ) throws java.io.IOException, jakarta.servlet.ServletException {
 
+        // Skip for OPTIONS (preflight) and auth endpoints
+        if (request.getMethod().equals("OPTIONS") || request.getServletPath().contains("/api/auth/")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         String authHeader = request.getHeader("Authorization");
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
